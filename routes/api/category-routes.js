@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { canTreatArrayAsAnd } = require('sequelize/types/lib/utils');
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
@@ -9,7 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
   try {
     const categoryData = await Category.findAll({
-      include: [{ model: Product }]
+      include: [ Product ]
     })
     res.json(categoryData)
   } catch (err) {
@@ -24,8 +23,9 @@ router.get('/:id', async (req, res) => {
 
     const singleCatagory = await Category.findByPk(
       req.params.id, {
-      include: [{ model: Product }]
+      include: [ Product ]
     })
+    res.json(singleCatagory)
   } catch (err) {
     res.json(err)
   }
@@ -39,7 +39,6 @@ router.post('/', async (req, res) => {
   } catch (err) {
     res.json(err)
   }
-
 });
 
 router.put('/:id', async (req, res) => {
