@@ -118,12 +118,13 @@ router.put('/:id', (req, res) => {
     });
 });
 
+// delete one product by its `id` value
 router.delete('/:id', async (req, res) => {
   const userData = await Product.destroy({
     where: {
       id: req.params.id
     }})
-  // delete one product by its `id` value
+  
 });
 
 module.exports = router;
